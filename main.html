@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Add Trash</title>
+
+
+
+<script src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/3.6.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.6.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.6.1/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.6.1/firebase-messaging.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDxAz843KOYl4qjvFDUbl98QA_AHXeOnYA",
+    authDomain: "trashalert-4c347.firebaseapp.com",
+    databaseURL: "https://trashalert-4c347.firebaseio.com",
+    storageBucket: "trashalert-4c347.appspot.com",
+    messagingSenderId: "545132070221"
+  };
+  firebase.initializeApp(config);
+  var email="israelmikan@gmail.com";
+  var password="dangers";
+  
+  function getdetails(){
+	  firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+  // Handle Errors here.
+  var errorCode = error.code;
+  var errorMessage = error.message;
+  // ...
+});
+if(errorCode=" "){
+	//alert("Auth Successfull");
+	var database = firebase.database();
+	writeData();
+	
+	
+	
+	
+	}else{
+		alert("OOps Auth Fail");
+		}
+ }
+ 
+ var trashid=Math.floor((Math.random() * 100000000000) + 1);
+ function writeData(userId, name, email, imageUrl) {
+  firebase.database().ref('trash/'+trashid).set({
+    latitude: localStorage.laty,
+    longitude:localStorage.longy,
+	comment: "Newly Added",
+	status: "New",
+	trashid:trashid,
+    picture : localStorage.getItem("picture_data")
+  });
+  alert("Saved Successfully");
+  DelayRedirect();
+}
+</script>
+<!-- Leave out Storage -->
+<!-- <script src="https://www.gstatic.com/firebasejs/3.6.1/firebase-storage.js"></script> -->
+
+ <script type="text/javascript">
+function DelayRedirect() {
+    var seconds =15;
+    var dvCountDown = document.getElementById("dvCountDown");
+    var lblCount = document.getElementById("lblCount");
+    dvCountDown.style.display = "block";
+    lblCount.innerHTML = seconds;
+    setInterval(function () {
+        seconds--;
+        lblCount.innerHTML = seconds;
+        if (seconds == 0) {
+            dvCountDown.style.display = "none";
+            window.location = "index.html";
+        }
+    }, 1000);
+}
+</script>
+
+</head>
+
+<body onload="getdetails();">
+<center><img src="img/trash.png" />
+<hr />
+<h2>Thanks For keeping Kampala City Clean</h2>
+<center><a href="trashes.html"><h5>View Trash Points</h4></a></center>
+<a href="index.html" style="visibility:hidden"><img src="img/back.png" /></a><br />
+ <div id="dvCountDown" style = "display:none">
+Please wait while we save details, redirected in <span id = "lblCount"></span>&nbsp;seconds.
+</div>
+</center>
+ <center><br><br>
+	<center> &copy; Developed By Team DHCP</center><br>Transport Hackathon 2016 </center>
+
+</body>
+</html>

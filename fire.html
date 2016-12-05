@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+
+
+<script src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCzmrZ-UBQWmj5qt-kDVjPANqJjP0EIhIE",
+    authDomain: "rwanda.firebaseapp.com",
+    databaseURL: "https://rwanda.firebaseio.com",
+    storageBucket: "firebase-rwanda.appspot.com",
+    messagingSenderId: "783535704599"
+  };
+  firebase.initializeApp(config);
+  var email="israelmikan@gmail.com";
+  var password="dangers";
+  firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+  // Handle Errors here.
+  var errorCode = error.code;
+  var errorMessage = error.message;
+  // ...
+});
+  
+  
+  var database = firebase.database();
+  var userId="12345";
+  function writeUserData(userId, name, email, imageUrl) {
+  firebase.database().ref('trash/' + userId).set({
+    username: 'name',
+    email: 'email',
+    profile_picture : 'imageUrl'
+  });
+}
+
+function fire(){
+	writeUserData();
+}
+
+</script>
+</head>
+
+<body  onload="fire();">
+</body>
+</html>
